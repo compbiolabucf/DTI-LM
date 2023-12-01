@@ -1,0 +1,17 @@
+_target_: datamodule.dataloader.UNIDataModule
+
+dm_cfg:
+  batch_size: 128
+  num_workers: 4
+
+splitting:
+    ratio: ''
+
+serializer:
+  load_serialized: True
+  target_name: 'luo_ESM.pt'
+  drug_name: 'luo_PubChem10M.pt'
+  save_path: './datasets/serialized/'
+  
+  #
+  

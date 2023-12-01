@@ -1,0 +1,7 @@
+root_path: "/home/tahmed/baselines_DTI/data_code/data/luo's_dataset/"
+data_path: 'data_folds/protein_coldstart/'
+seq_path: 'feature/'
+mapping_path: 'mapping/'
+data_name: ['train_fold_1.csv', 'test_fold_1.csv']
+name: 'luo'
+

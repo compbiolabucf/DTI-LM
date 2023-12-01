@@ -1,0 +1,6 @@
+drugfeaturizer:
+  _target_: module.featurizer.drug_featurizer.chembert_featurizer.CHEMFEATURE
+
+protfeaturizer:
+  _target_: module.featurizer.prot_featurizer.esm_featurizer.ESMFEATURE
+

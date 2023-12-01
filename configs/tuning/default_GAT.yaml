@@ -1,0 +1,76 @@
+param_search:
+  tune: False
+  
+  search_space:
+    lr: 
+      _target_: ray.tune.loguniform
+      lower: 0.00001
+      upper: 0.01
+    
+    batch_size:
+      _target_: ray.tune.choice
+      categories: [128, 256, 512, 768, 1024, 1280]
+       
+    dropout:
+      _target_: ray.tune.choice
+      categories: [0.2]
+
+    layers:
+      _target_: ray.tune.choice
+      categories: [[512,256],[256,128], [1024,512,256], [512,256,128], [256,128,64], [1024,512,256,128], [512,256,128,64], [256,128,64,32], [2048,1024,256,128]]
+
+    activation_fn:
+      _target_: ray.tune.choice
+      categories: [ReLU]
+    
+    optimizer:
+      _target_: ray.tune.choice
+      categories: [Adam]
+        
+    drug_gat:
+      out_channels:
+        _target_: ray.tune.choice
+        categories: [64, 128, 256, 512]
+      heads:
+        _target_: ray.tune.choice
+        categories: [2, 4, 8]
+      dropout:
+        _target_: ray.tune.choice
+        categories: [0.1, 0.2, 0.3]
+      add_self_loops:
+        _target_: ray.tune.choice
+        categories: [True, False]
+      num_layers:
+        _target_: ray.tune.choice
+        categories: [1, 2, 3, 4]
+
+    prot_gat:
+      out_channels:
+        _target_: ray.tune.choice
+        categories: [64, 128, 256, 512]
+      heads:
+        _target_: ray.tune.choice
+        categories: [2, 4, 8]
+      dropout:
+        _target_: ray.tune.choice
+        categories: [0.1, 0.2, 0.3]
+      add_self_loops:
+        _target_: ray.tune.choice
+        categories: [True, False]
+      num_layers:
+        _target_: ray.tune.choice
+        categories: [1, 2, 3, 4]
+
+    drug_threshold:
+      _target_: ray.tune.loguniform
+      lower: 0.01
+      upper: 7
+    
+    prot_threshold:
+      _target_: ray.tune.loguniform
+      lower: 0.01
+      upper: 5
+      
+    alpha:
+      _target_: ray.tune.choice
+      categories: [0.1, 1, 5, 10, 100]

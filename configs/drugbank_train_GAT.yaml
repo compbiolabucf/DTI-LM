@@ -1,0 +1,33 @@
+# if using GAT, change GAT, module, datamodule, best_param_name
+defaults:
+  - _self_
+  - module: GAT.yaml
+  - datamodule: drugbank_GAT.yaml
+  - callbacks: default.yaml
+  - preprocess: drugbank.yaml
+  - featurizer: default.yaml
+  - tuning: default_GAT.yaml
+  - GAT: default.yaml
+
+trainer:
+  max_epochs: 200
+
+logger:
+  name: 'drugbank'
+
+best_param_path: './configs/best_params/'
+best_param_name: 'cold_drug_balanced_GAT.yaml'
+
+variant_pred: False
+
+multiprocessing:
+  multiprocessing: False
+  num_process: 10
+  concurrent_process: 10
+
+  
+
+
+
+
+

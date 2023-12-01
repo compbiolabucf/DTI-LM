@@ -1,0 +1,20 @@
+_target_: datamodule.dataloader_GAT.UNIDataModule
+
+dm_cfg:
+  batch_size: 128
+  num_workers: 4
+
+splitting:
+  ratio: [0.79,0.01,0.20]
+  balanced: True
+  unbalanced_ratio: 10 
+  splitting_strategy: 'random'  #random, cold_drug, cold_target
+  seed: 42
+
+serializer:
+  load_serialized: True
+  target_name: 'DrugBank_ESM.pt'
+  drug_name: 'DrugBank_PubChem10M.pt'
+  save_path: './datasets/serialized/'
+
+#PubChem10M

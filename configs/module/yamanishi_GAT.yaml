@@ -1,0 +1,40 @@
+_target_: module.GAT.Net
+
+network:
+  drug_dim: 768
+  prot_dim: 1280
+  layers: [256,128]
+  dropout: 0.1
+  output_dim: 1
+  activation_fn: ReLU
+  
+optimizer:
+  optimizer: Adam
+  lr: 0.00012788649587402504
+  weight_decay: 0.0003288569456597804
+
+criterion:
+  _target_: torch.nn.BCEWithLogitsLoss
+  pos_weight: 1
+  
+GAT_params:
+  drug_gat:
+    out_channels: 96
+    heads: 8
+    dropout: 0.3
+    add_self_loops: False
+    num_layers: 4
+    threshold: 5
+  
+  prot_gat:
+    out_channels: 160
+    heads: 8
+    dropout: 0.2
+    add_self_loops: True
+    num_layers: 2
+    threshold: 2
+  
+  concat:
+    concat: False
+    alpha: 10
+  

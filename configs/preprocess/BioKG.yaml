@@ -1,0 +1,5 @@
+root_path: "/home/tahmed/baselines_DTI/data_code/data/BioKG/"
+data_path: 'data_folds/protein_coldstart/'
+data_name: ['train_fold_1.csv', 'test_fold_1.csv']
+name: 'BioKG'
+

@@ -1,0 +1,28 @@
+defaults:
+  - _self_
+  - module: GAT.yaml
+  - datamodule: yamanishi_GAT.yaml
+  - callbacks: default.yaml
+  - preprocess: yamanishi.yaml
+  - featurizer: default.yaml
+  - tuning: default_GAT.yaml
+  - GAT: default.yaml
+
+trainer:
+  max_epochs: 200
+
+logger:
+  name: 'yamanishi'
+
+best_param_path: './configs/best_params/'
+best_param_name: 'yamanishi_GAT.yaml'
+
+multiprocessing:
+  multiprocessing: True
+  num_process: 10
+  concurrent_process: 10
+
+# Just change the data name for a different fold. If want to change dataset, go to preprocess.yaml and change the data path
+#Also remember to change best param name 
+#command: python run.py --config-name yamanishi_train.yaml "tuning.param_search.tune=False" 
+#        "preprocess.data_name=train_fold_1.csv test_fold_1.csv"

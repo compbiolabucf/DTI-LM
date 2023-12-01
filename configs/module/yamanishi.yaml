@@ -1,0 +1,17 @@
+_target_: module.MLP.Net
+
+network:
+  drug_dim: 768
+  prot_dim: 1280
+  layers: [256,128]
+  dropout: 0.1
+  output_dim: 1
+  activation_fn: ReLU
+  
+optimizer:
+  optimizer: Adam
+  lr: 0.00012788649587402504
+  weight_decay: 0.0003288569456597804
+
+criterion:
+  _target_: torch.nn.BCEWithLogitsLoss

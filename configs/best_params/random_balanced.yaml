@@ -1,0 +1,7 @@
+cfg['datamodule']['dm_cfg']['batch_size']: 512
+cfg['module']['optimizer']['lr']: 0.00024614317367271417
+cfg['module']['network']['layers']: [512, 256] 
+cfg['module']['network']['dropout']: 0.2
+cfg['module']['network']['activation_fn']: "'ReLU'"
+cfg['module']['optimizer']['weight_decay']: 0.0006755020499865177
+cfg['module']['optimizer']['optimizer']: "'Adam'"

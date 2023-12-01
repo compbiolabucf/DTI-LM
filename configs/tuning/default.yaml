@@ -1,0 +1,38 @@
+param_search:
+  tune: False
+  search_param_path: 'drugbank_search.yaml'
+
+  search_space:
+    lr: 
+      _target_: ray.tune.loguniform
+      lower: 0.0001
+      upper: 0.1
+    
+    batch_size:
+      _target_: ray.tune.choice
+      categories: [32, 64, 128, 256, 512]
+       
+    dropout:
+      _target_: ray.tune.choice
+      categories: [0.1, 0.2, 0.3, 0.4, 0.5]
+
+    layers:
+      # To search over all possible layer combinations, uncomment following lines
+      #max_hid_layers: 4
+      #min_hid_layers: 1
+      #layer_sizes: [2048, 1024, 512, 256, 128, 64, 32]
+      _target_: ray.tune.choice
+      categories: [[512,256],[256,128], [1024,512,256], [512,256,128], [1024,512,256,128], [2056,1024,512,256], [2056,1024,512,256,128],[1024,512,256,128,64], [512,256,64], [256,128,64]]
+
+    activation_fn:
+      _target_: ray.tune.choice
+      categories: [ReLU, Tanh]
+    
+    optimizer:
+      _target_: ray.tune.choice
+      categories: [Adam, SGD]
+    
+    weight_decay:
+      _target_: ray.tune.loguniform
+      lower: 0.000001
+      upper: 0.001

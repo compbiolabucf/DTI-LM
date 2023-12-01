@@ -1,0 +1,16 @@
+_target_: datamodule.dataloader_GAT.UNIDataModule
+
+dm_cfg:
+  batch_size: 128
+  num_workers: 4
+
+splitting:
+    ratio: ''
+
+serializer:
+  load_serialized: True
+  target_name: 'yamanishi_ESM.pt'
+  drug_name: 'yamanishi_PubChem10M.pt'
+  save_path: './datasets/serialized/'
+  
+  

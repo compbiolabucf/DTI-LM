@@ -1,0 +1,32 @@
+# if using GAT, change GAT, module, datamodule, best_param_name
+defaults:
+  - _self_
+  - module: MLP.yaml
+  - datamodule: drugbank.yaml
+  - callbacks: default.yaml
+  - preprocess: drugbank.yaml
+  - featurizer: default.yaml
+  - tuning: default.yaml
+
+trainer:
+  max_epochs: 200
+
+logger:
+  name: 'drugbank'
+
+best_param_path: './configs/best_params/'
+best_param_name: 'random_balanced.yaml'
+
+variant_pred: False
+
+multiprocessing:
+  multiprocessing: False
+  num_process: 10
+  concurrent_process: 10
+
+  
+
+
+
+
+

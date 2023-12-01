@@ -1,0 +1,7 @@
+data_path: './datasets/bindingDB/'
+label: 'Kd'  #Kd, IC50, Ki, EC50
+threshold: [30,100]
+binary: True
+convert_to_log: True
+name: 'bindingDB'
+

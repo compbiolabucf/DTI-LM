@@ -1,0 +1,17 @@
+cfg['datamodule']['dm_cfg']['batch_size']: 512
+cfg['module']['optimizer']['lr']: 0.00024614317367271417
+cfg['module']['network']['layers']: [512, 256] 
+cfg['module']['network']['dropout']: 0.2
+cfg['module']['network']['activation_fn']: "'ReLU'"
+cfg['module']['optimizer']['weight_decay']: 0.0006755020499865177
+cfg['module']['optimizer']['optimizer']: "'Adam'"
+cfg['module']['GAT_params']['drug_gat']['out_channels']: 256
+cfg['module']['GAT_params']['drug_gat']['heads']: 8
+cfg['module']['GAT_params']['drug_gat']['dropout']: 0.3
+cfg['module']['GAT_params']['drug_gat']['add_self_loops']: False
+cfg['module']['GAT_params']['drug_gat']['num_layers']: 4
+cfg['module']['GAT_params']['prot_gat']['out_channels']: 128
+cfg['module']['GAT_params']['prot_gat']['heads']: 8
+cfg['module']['GAT_params']['prot_gat']['dropout']: 0.2
+cfg['module']['GAT_params']['prot_gat']['add_self_loops']: True
+cfg['module']['GAT_params']['prot_gat']['num_layers']: 2

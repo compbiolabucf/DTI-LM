@@ -1,0 +1,32 @@
+# if using GAT, change GAT, module, datamodule, best_param_name
+defaults:
+  - _self_
+  - module: MLP.yaml
+  - datamodule: bindingDB.yaml
+  - callbacks: default.yaml
+  - preprocess: bindingDB.yaml
+  - featurizer: default.yaml
+  - tuning: default.yaml
+
+trainer:
+  max_epochs: 200
+
+logger:
+  name: 'bindingDB'
+
+best_param_path: './configs/best_params/'
+best_param_name: 'random_balanced.yaml'
+
+variant_pred: False
+
+multiprocessing:
+  multiprocessing: True
+  num_process: 10
+  concurrent_process: 10
+
+  
+
+
+
+
+
