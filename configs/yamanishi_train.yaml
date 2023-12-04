@@ -22,7 +22,5 @@ multiprocessing:
   num_process: 10
   concurrent_process: 10
 
-# Just change the data name for a different fold. If want to change dataset, go to preprocess.yaml and change the data path
-#Also remember to change best param name 
-#command: python run.py --config-name yamanishi_train.yaml "tuning.param_search.tune=False" 
-#        "preprocess.data_name=train_fold_1.csv test_fold_1.csv"
+#remember to change best param name 
+#command: python run.py --config-name yamanishi_train.yaml "tuning.param_search.tune=False"

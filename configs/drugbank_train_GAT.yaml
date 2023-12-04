@@ -18,8 +18,6 @@ logger:
 best_param_path: './configs/best_params/'
 best_param_name: 'cold_drug_balanced_GAT.yaml'
 
-variant_pred: False
-
 multiprocessing:
   multiprocessing: False
   num_process: 10

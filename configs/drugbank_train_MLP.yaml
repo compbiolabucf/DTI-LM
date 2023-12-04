@@ -17,8 +17,6 @@ logger:
 best_param_path: './configs/best_params/'
 best_param_name: 'random_balanced.yaml'
 
-variant_pred: False
-
 multiprocessing:
   multiprocessing: False
   num_process: 10

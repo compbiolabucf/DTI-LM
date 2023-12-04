@@ -21,17 +21,17 @@ from ray.tune.schedulers import ASHAScheduler
 import multiprocessing
 from multiprocessing import Manager
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-#pl.seed_everything(seed=42)
-#torch.backends.cudnn.deterministic = True
-#torch.backends.cudnn.benchmark = False
 
 
+"""
+define device for featurizer that's outside the lightning module
+"""
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #device = 'cpu'
 def train(cfg,dataset,shared_metrics,tune=False):
     tb_logger = TensorBoardLogger('../logger_DTI/tb_logs', name=cfg['logger']['name'])
     
-    # Init featurizer model
+    # Init datamodule
     data_module: LightningModule = hydra.utils.instantiate(
         cfg['datamodule'],cfg, dataset, _recursive_=False
     )
@@ -40,6 +40,8 @@ def train(cfg,dataset,shared_metrics,tune=False):
     model: LightningModule = hydra.utils.instantiate(
         cfg['module'],cfg,dataset, _recursive_=False
     )
+
+    # Init callbacks (early stopping, checkpointing)
     callbacks: List[Callback] = utils.instantiate_callbacks(
         cfg['callbacks']
     )
@@ -68,12 +70,27 @@ _HYDRA_PARAMS = {
 @hydra.main(**_HYDRA_PARAMS)
 def main(cfg) -> Optional[float]:  
     pre_process = PREPROCESS(cfg['preprocess'])
+    """
+    Any necessary precrocessing of the data to return
+    X_drug: nx1 pd.DataFrame, index=drug names, Column 1=SMILES sequence. 
+    X_target: mx1 pd.DataFrame, index=target names, Column 1=protein sequence. 
+    DTI: mxn (available) pd.DataFrame, index: 0-mxn, Column 1=Drug names matching X_drug index, Column 2=Target names matching
+    X_target index, Column 3= interaction label (0,1)
+    """
     X_drug, X_target, DTI = pre_process.process_data()
+    """
+    If any DDI is to be used other than LM encoding based DDI, it can be returned here. 
+    Deafult in get_ddi is raw sequence based DDI.
+    For encoding based DDI, skip it. 
+    """
     #ddi,skipped = utils.get_ddi(X_drug)
-
+    
     logger, logger_dir = utils.get_logger(OmegaConf.to_container(cfg))
     new_dir = logger_dir.split('run')[0]
     
+    """
+    Load or generate/save drug and target LM encodings, For any other encoding, load X_drug and X_target accordingly
+    """
     save_path = cfg['datamodule']['serializer']['save_path']
     drug_name = cfg['datamodule']['serializer']['drug_name']
     target_name = cfg['datamodule']['serializer']['target_name']
@@ -100,6 +117,8 @@ def main(cfg) -> Optional[float]:
         X_target_features = prot_featurizer.get_representations(X_target.SEQ.values)
         X_target = pd.DataFrame(X_target_features,index=X_target.index)
         torch.save(X_target,save_path+target_name)
+        print(f'Rerun with load_serialized=True to load the serialized data from {save_path}')
+        sys.exit()
         
     manager = Manager()
     shared_metrics = manager.dict()
@@ -141,6 +160,9 @@ def main(cfg) -> Optional[float]:
         train(best_trial.config,dataset,shared_metrics)
         ray.shutdown()
     else:
+        """
+        set best parameters file for the experiment and update model configs from that file 
+        """
         cfg = utils.update_best_param(cfg)
         if cfg['multiprocessing']['multiprocessing']:
             X_drug_orig, X_target_orig, DTI_orig = X_drug.copy(), X_target.copy(), DTI.copy()

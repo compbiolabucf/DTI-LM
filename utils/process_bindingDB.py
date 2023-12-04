@@ -160,34 +160,5 @@ def process_data(config):
     #drop rows based on duplicate index values
     X_drug = X_drug[~X_drug.index.duplicated(keep='first')]
     X_target = X_target[~X_target.index.duplicated(keep='first')]
-    
-    """
-    measure sequence similarities
-    protein: clustal omega
-    drug: rdkit
-    """
-    #create_fasta(X_target)
-    #drug_similarity(X_drug,save=False)
-    
-    """
-    data = pd.read_csv('/home/tahmed/DTI/utils/pim',delimiter='\t',header=None,skiprows=5)
-    #split wach row of the dataframe at space 
-    new_data =[]
-    for i in range(len(data)):
-        temp = data.iloc[i].str.split(' ')[0]
-        temp_1=[]
-        for j in temp:
-            if j!='':
-                temp_1.append(j)
-        new_data.append(temp_1)
-    #create a dataframe from the list
-    new_data = pd.DataFrame(new_data)
-    #remove the first column
-    new_data = new_data.drop(columns=[0])
-    new_data.set_index(1,inplace=True)
-    #remove the diagonal elements
-    new_data = new_data.mask(np.eye(len(new_data),dtype=bool)).astype(float)
-    print(f'average protein similarity: {np.nanmean(new_data)}')
-    """
-
+  
     return X_drug, X_target, DTI
