@@ -1,3 +1,0 @@
-- tuning.param_search.tune=False
-- datamodule.splitting.balanced=False
-- datamodule.splitting.splitting_strategy=random
