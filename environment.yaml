@@ -1,4 +1,4 @@
-name: DTI1
+name: DTI-LM
 channels:
   - pyg
   - anaconda
