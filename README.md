@@ -8,7 +8,7 @@ This repository contains code for DTI-LM, a drug-target interaction prediction f
 3. Faster runtime than comparable methods. 
 4. Investigates the current standing of language model-based DTI prediction capability and limitations.
 
-![Alt text]([https://github.com/compbiolabucf/DTI-LM/blob/main/overall-1.png])
+<img src="https://github.com/compbiolabucf/DTI-LM/blob/main/overall-1.png" width="450" height="450">
 
 
 ## Run Locally
