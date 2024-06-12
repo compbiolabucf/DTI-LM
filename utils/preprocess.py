@@ -1,5 +1,5 @@
 from utils import process_DB
-from utils import process_yamanishi, process_luo, process_hetionet, process_BioKG, process_bindingDB
+from utils import process_bindingDB #process_yamanishi, process_luo, process_hetionet, process_BioKG, 
 import sys 
 
 
