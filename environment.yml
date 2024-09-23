@@ -1,4 +1,4 @@
-name: DTI-ENV
+name: DTIENV
 channels:
   - anaconda
   - pytorch
